@@ -1,7 +1,10 @@
+import org.gradle.kotlin.dsl.implementation
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    id ("kotlin-kapt")
 }
 
 android {
@@ -56,4 +59,18 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
+
+    // Room components
+    implementation ("androidx.room:room-runtime:2.6.1")
+    kapt ("androidx.room:room-compiler:2.6.1")
+
+    // Kotlin Extensions and Coroutines support for Room
+    implementation("androidx.room:room-ktx:2.6.1")
+
+    // Lifecycle + ViewModel (MVVM support)
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.6")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.6")
+    // Jetpack Compose integration with LiveData / ViewModel
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.8.6")
+
 }
