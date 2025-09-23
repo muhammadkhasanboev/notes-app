@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Notes</string>
+    <!--HomeScreen-->
+    <string name="add_button_description">Add Button</string>
 </resources>
