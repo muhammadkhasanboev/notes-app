@@ -45,6 +45,7 @@ object HomeDestination : NavigationDestination {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
+    navigateToNoteEntry: () -> Unit,
     modifier: Modifier = Modifier
 ){
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
@@ -60,7 +61,7 @@ fun HomeScreen(
         },
         floatingActionButton = {
             FloatingActionButton(
-                onClick = {}, //adding new note screen should be added
+                onClick = navigateToNoteEntry, //adding new note screen should be added
                 shape = MaterialTheme.shapes.medium,
                 modifier = Modifier.padding(20.dp)
             ) {
@@ -92,7 +93,7 @@ private fun HomeBody(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
     ){
-        if(noteList.isNotEmpty()){
+        if(noteList.isEmpty()){
             Text(
                 text = stringResource(id = R.string.no_note_description),
                 textAlign = TextAlign.Center,

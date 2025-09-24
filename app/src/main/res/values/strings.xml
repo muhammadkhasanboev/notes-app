@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Notes</string>
     <string name="home">Home</string>
+    <string name="new_note">New note</string>
     <string name="back_button">Back button</string>
     <string name="item_entry_title">Add item</string>
     <string name="no_note_description">No notes in the memory.\nTap + to add.</string>
