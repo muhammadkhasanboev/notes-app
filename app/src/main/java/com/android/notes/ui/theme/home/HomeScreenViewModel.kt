@@ -18,9 +18,9 @@ class HomeScreenViewModel(private val repository: OfflineNoteRepository): ViewMo
             initialValue = emptyList()
         )
 
-    fun addNote(note: Note){
+    fun updateNote(note: Note){
         viewModelScope.launch {
-            repository.insertNote(note)
+            repository.updateNote(note)
         }
     }
 
