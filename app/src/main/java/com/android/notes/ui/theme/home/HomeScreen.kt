@@ -1,12 +1,21 @@
 package com.android.notes.ui.theme.home
 
 import android.graphics.drawable.Icon
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -18,6 +27,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -89,12 +99,64 @@ private fun HomeBody(
                 style = MaterialTheme.typography.titleLarge,
                 modifier = modifier.padding(contentPadding)
             )
+        } else {
+            notesList(
+                noteList = noteList,
+                onNoteClick = { onNoteClick(it.id) },
+                contentPadding = contentPadding,
+                modifier = Modifier.padding(8.dp)
+            )
         }
     }
 }
 
-//@Composable
-//@Preview(showSystemUi = true)
-//fun check(){
-//    HomeScreen()
-//}
+@Composable
+private fun notesList(
+    noteList: List<Note>,
+    onNoteClick: (Note) -> Unit,
+    contentPadding: PaddingValues,
+    modifier: Modifier = Modifier
+){
+    LazyColumn(
+        modifier = modifier,
+        contentPadding = contentPadding
+    ){
+        items(items = noteList, key = {it.id}) { note ->
+            Notes(
+                note = note,
+                modifier = Modifier
+                    .padding(8.dp)
+                    .clickable { onNoteClick(note) }
+            )
+
+        }
+    }
+}
+
+@Composable
+private fun Notes(
+    note: Note,
+    modifier: Modifier = Modifier
+){
+    Card(
+        modifier = modifier,
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+    ){
+        Column(
+            modifier = modifier.padding(20.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ){
+            Row(
+                modifier = modifier.fillMaxWidth()
+            ){
+                Text(
+                    text = note.title,
+                    style = MaterialTheme.typography.titleLarge
+                )
+                Spacer(Modifier.weight(1f))
+            }
+
+        }
+    }
+}
+
